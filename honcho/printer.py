@@ -24,7 +24,7 @@ class Printer(object):
     def _prefix(self):
         time = datetime.now().strftime('%H:%M:%S')
         name = self.name.ljust(self.width)
-        prefix = '{time} {name} | '.format(time=time, name=name)
+        prefix = '{time} {name} :: '.format(time=time, name=name)
         if self.colour:
             return _colour_string(self.colour, prefix)
         else:
