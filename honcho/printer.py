@@ -24,7 +24,7 @@ class Printer(object):
     def _prefix(self):
         time = datetime.now().strftime('%H:%M:%S')
         name = self.name.ljust(self.width)
-        prefix = '{time} {name} :: '.format(time=time, name=name)
+        prefix = '{time} {name} | '.format(time=time, name=name)
         if self.colour:
             return _colour_string(self.colour, prefix)
         else:
@@ -32,8 +32,10 @@ class Printer(object):
 
 
 def _ansi(code):
-    return '\033[{0}m'.format(code)
-
+    if self.output.isatty():
+        return '\033[{0}m'.format(code)
+    else:
+        return ''
 
 def _colour_string(colour, s):
     return '{0}{1}{2}'.format(_ansi(colour), s, _ansi(0))
