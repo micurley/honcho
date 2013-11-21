@@ -26,16 +26,16 @@ class Printer(object):
         name = self.name.ljust(self.width)
         prefix = '{time} {name} | '.format(time=time, name=name)
         if self.colour:
-            return _colour_string(self.colour, prefix)
+            # removing colors b/c it causes issues with Librato
+            #return _colour_string(self.colour, prefix)
+            return prefix
         else:
             return prefix
 
 
 def _ansi(code):
-    if self.output.isatty():
-        return '\033[{0}m'.format(code)
-    else:
-        return ''
+    return '\033[{0}m'.format(code)
+
 
 def _colour_string(colour, s):
     return '{0}{1}{2}'.format(_ansi(colour), s, _ansi(0))
